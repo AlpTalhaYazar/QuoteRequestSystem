@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Core\QuoteRequestSystem.Core.csproj" />
     <ProjectReference Include="..\Domain\QuoteRequestSystem.Domain.csproj" />
   </ItemGroup>
 
