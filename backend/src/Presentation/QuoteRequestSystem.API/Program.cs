@@ -1,9 +1,13 @@
+using QuoteRequestSystem.API.Filters;
 using QuoteRequestSystem.Infrastructure.DependencyInjection;
 using QuoteRequestSystem.Infrastructure.SeedData;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(config =>
+{
+    config.Filters.Add<CustomResultFilter>();
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
