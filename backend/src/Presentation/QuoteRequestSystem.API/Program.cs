@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using QuoteRequestSystem.API.Filters;
 using QuoteRequestSystem.Infrastructure.DependencyInjection;
 using QuoteRequestSystem.Infrastructure.SeedData;
@@ -24,6 +25,19 @@ builder.Services.AddCors(options =>
                 .AllowAnyMethod()
                 .AllowCredentials();
         });
+});
+
+builder.Services.AddApiVersioning(options =>
+{
+    options.DefaultApiVersion = new ApiVersion(1);
+    options.ReportApiVersions = true;
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.ApiVersionReader = ApiVersionReader.Combine(
+        new UrlSegmentApiVersionReader());
+}).AddApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'V";
+    options.SubstituteApiVersionInUrl = true;
 });
 
 var app = builder.Build();
