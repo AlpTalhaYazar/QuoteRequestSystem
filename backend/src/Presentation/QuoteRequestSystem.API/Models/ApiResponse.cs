@@ -1,5 +1,7 @@
 using System.Text.Json.Serialization;
 
+namespace QuoteRequestSystem.API.Models;
+
 public class ApiResponse<T>
 {
     [JsonPropertyName("isSuccess")]

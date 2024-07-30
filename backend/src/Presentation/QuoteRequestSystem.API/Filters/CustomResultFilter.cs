@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using QuoteRequestSystem.API.Models;
 
 namespace QuoteRequestSystem.API.Filters;
 
