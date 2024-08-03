@@ -1,5 +1,3 @@
-// src/app/app.module.ts
-
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -52,7 +50,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     RouterModule,
     NzFormModule,
     NzInputModule,
-    NzInputNumberModule, // Add this line
+    NzInputNumberModule,
     NzButtonModule,
     NzSelectModule,
     NzRadioModule,

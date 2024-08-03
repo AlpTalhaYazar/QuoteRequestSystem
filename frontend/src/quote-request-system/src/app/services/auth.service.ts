@@ -10,7 +10,7 @@ import {UserLoginResponseDto} from '../models/api-responses/user-login-response-
 })
 
 export class AuthService {
-  private readonly baseUrl = 'http://localhost:5258';
+  private readonly baseUrl = 'http://localhost:5184';
   private readonly tokenKey = 'jwt';
   public isLoggedInValue = new BehaviorSubject<boolean>(false);
 
@@ -23,16 +23,12 @@ export class AuthService {
       .pipe(
         tap(response => {
           if (response.isSuccess && response.data) {
-            console.log('Login successful:', response.message);
-
             this.isLoggedInValue.next(true);
             localStorage.setItem('hasJwt', 'true');
           } else if (!response.isSuccess) {
-            console.error('Login failed:', response.message);
           }
         }),
         catchError(error => {
-          console.error('Login failed:', error);
           return throwError(error);
         })
       );
@@ -48,7 +44,6 @@ export class AuthService {
           }
         }),
         catchError(error => {
-          console.error('Logout failed:', error);
           return throwError(error);
         })
       );
@@ -64,15 +59,11 @@ export class AuthService {
       .pipe(
         tap(response => {
           if ((response as any).data.isAuthenticated === true) {
-            console.log('Session is valid');
             this.isLoggedInValue.next(true);
           }
-          console.log((response as any).data.isAuthenticated);
         }),
         catchError(error => {
-          console.error('Check session failed:', error);
           this.isLoggedInValue.next(false);
-          console.log('isLoggedInValue:', this.isLoggedInValue.value);
           return throwError(error);
         })
     );

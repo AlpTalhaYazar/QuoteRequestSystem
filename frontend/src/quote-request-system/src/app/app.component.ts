@@ -15,7 +15,8 @@ import {Router} from "@angular/router";
                 <span class="text-2xl font-bold text-blue-600">ForceGet</span>
               </div>
               <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                <a *ngIf="this.authService.isLoggedInValue.value" routerLink="/quote-request" routerLinkActive="text-gray-900 border-b-2 border-blue-500"
+                <a *ngIf="this.authService.isLoggedInValue.value" routerLink="/quote-request"
+                   routerLinkActive="text-gray-900 border-b-2 border-blue-500"
                    class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                   New Quote Request
                 </a>
@@ -67,7 +68,6 @@ export class AppComponent {
   logout() {
     this.authService.logout().subscribe({
       next: (response) => {
-        console.log('Logout successful:', response);
         this.message.success('Logout successful');
         // asynch call to navigate to login page after 1 second
         setTimeout(() => {
@@ -76,7 +76,6 @@ export class AppComponent {
       },
       error: (error) => {
         this.message.error('Failed to logout: ' + error.message);
-        console.error('Logout failed:', error);
       }
     });
   }
