@@ -10,7 +10,7 @@ namespace QuoteRequestSystem.API.Controllers;
 
 [ApiController]
 [ApiVersion(1)]
-[Route("api/v{v:apiVersion}/offer")]
+[Route("api/v{v:apiVersion}/quote")]
 public class QuoteController(IServiceFactory serviceFactory) : ControllerBase
 {
     private readonly IQuoteService _quoteService = serviceFactory.CreateQuoteService();

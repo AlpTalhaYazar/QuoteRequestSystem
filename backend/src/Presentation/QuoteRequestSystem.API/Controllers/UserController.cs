@@ -14,7 +14,7 @@ namespace QuoteRequestSystem.API.Controllers;
 
 [ApiController]
 [ApiVersion(1)]
-[Route("api/v{v:apiVersion}/offer")]
+[Route("api/v{v:apiVersion}/user")]
 public class UserController(IServiceFactory serviceFactory, IConfiguration configuration) : ControllerBase
 {
     private readonly IUserService _userService = serviceFactory.CreateUserService();
