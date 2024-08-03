@@ -1,0 +1,121 @@
+<form nz-form [formGroup]="quoteRequestForm" (ngSubmit)="submitForm()" class="max-w-3xl mx-auto mt-8">
+  <h2 class="text-2xl font-bold mb-6">Create New Offer</h2>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">Mode</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-radio-group formControlName="mode">
+        <label nz-radio-button nzValue="LCL">LCL</label>
+        <label nz-radio-button nzValue="FCL">FCL</label>
+        <label nz-radio-button nzValue="Air">Air</label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">Movement Type</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-select formControlName="movementType">
+        <nz-option nzValue="Door to Door" nzLabel="Door to Door"></nz-option>
+        <nz-option nzValue="Port to Door" nzLabel="Port to Door"></nz-option>
+        <nz-option nzValue="Door to Port" nzLabel="Door to Port"></nz-option>
+        <nz-option nzValue="Port to Port" nzLabel="Port to Port"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">Incoterms</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-select formControlName="incoterms">
+        <nz-option nzValue="DDP" nzLabel="Delivered Duty Paid (DDP)"></nz-option>
+        <nz-option nzValue="DAT" nzLabel="Delivered At Place (DAT)"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">Country-City</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-select formControlName="countryCity" nzShowSearch nzAllowClear nzPlaceHolder="Select country and city">
+        <nz-option-group *ngFor="let country of countriesAndCities" [nzLabel]="country.name">
+          <nz-option *ngFor="let city of country.cities" [nzValue]="'country_id=' + country.id + '~' + 'city_id=' + city.id"
+                     [nzLabel]="city.name"></nz-option>
+        </nz-option-group>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">Package Type</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-select formControlName="packageType" (ngModelChange)="onPackageTypeChange($event)">
+        <nz-option nzValue="Pallets" nzLabel="Pallets"></nz-option>
+        <nz-option nzValue="Boxes" nzLabel="Boxes"></nz-option>
+        <nz-option nzValue="Cartons" nzLabel="Cartons"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">Package Dimension Unit</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-radio-group formControlName="packageDimensionUnit" (ngModelChange)="onPackageDimensionUnitChange($event)">
+        <label nz-radio-button nzValue="CM">CM</label>
+        <label nz-radio-button nzValue="IN">IN</label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">Dimensions</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <div class="flex space-x-2">
+        <nz-input-number formControlName="width" [nzDisabled]="true" [nzPlaceHolder]="'Width'"></nz-input-number>
+        <nz-input-number formControlName="length" [nzDisabled]="true" [nzPlaceHolder]="'Length'"></nz-input-number>
+        <nz-input-number formControlName="height" [nzDisabled]="true" [nzPlaceHolder]="'Height'"></nz-input-number>
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">Package Amount</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-input-number formControlName="packageAmount"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">Weight Unit</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-radio-group formControlName="weightUnit" (ngModelChange)="onWeightUnitChange($event)">
+        <label nz-radio-button nzValue="KG">KG</label>
+        <label nz-radio-button nzValue="LB">LB</label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">Weight Value</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-input-number formControlName="weight"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">Currency</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-select formControlName="currency">
+        <nz-option nzValue="USD" nzLabel="USD"></nz-option>
+        <nz-option nzValue="EUR" nzLabel="EUR"></nz-option>
+        <nz-option nzValue="TRY" nzLabel="TRY"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control [nzOffset]="6" [nzSpan]="14">
+      <button nz-button nzType="primary" [disabled]="!quoteRequestForm.valid">Submit</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
