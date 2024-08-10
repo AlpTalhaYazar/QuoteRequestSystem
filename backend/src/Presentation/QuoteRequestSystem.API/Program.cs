@@ -1,9 +1,16 @@
 using Asp.Versioning;
+using Microsoft.EntityFrameworkCore;
 using QuoteRequestSystem.API.Filters;
+using QuoteRequestSystem.Infrastructure.Data;
 using QuoteRequestSystem.Infrastructure.DependencyInjection;
 using QuoteRequestSystem.Infrastructure.SeedData;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.UseKestrel(serverOptions =>
+{
+    serverOptions.ListenAnyIP(5184);
+});
 
 builder.Services.AddControllers(config =>
 {
@@ -59,6 +66,11 @@ app.MapControllers();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
+    
+    var context = services.GetRequiredService<ApplicationDbContext>();
+    // Apply any pending migrations
+    context.Database.Migrate();
+    
     DatabaseSeeder.Seed(services);
 }
 
